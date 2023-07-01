@@ -2,8 +2,7 @@ from __future__ import absolute_import
 
 import torch.nn as nn
 
-
-__all__ = ['AlexNetV1', 'AlexNetV2', 'AlexNetV3']
+__all__ = ['AlexNetV1', 'AlexNetV2', 'AlexNetV3','']
 
 
 class _BatchNorm2d(nn.BatchNorm2d):
@@ -104,3 +103,4 @@ class AlexNetV3(_AlexNet):
         self.conv5 = nn.Sequential(
             nn.Conv2d(768, 512, 3, 1),
             _BatchNorm2d(512))
+        

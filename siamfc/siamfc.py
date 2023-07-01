@@ -20,8 +20,7 @@ from .heads import SiamFC
 from .losses import BalancedLoss
 from .datasets import Pair
 from .transforms import SiamFCTransforms
-# 导入VanillaNet，使用VanillaNet替换AlexNetV1
-from .VanillaNet.models.vanillanet import vanillanet_5
+from backboneVanillaNet import VanillaNet
 
 __all__ = ['TrackerSiamFC']
 
@@ -54,7 +53,7 @@ class TrackerSiamFC(Tracker):
         #     backbone=AlexNetV1(),
         #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
-            backbone=vanillanet_5(),
+            backbone=VanillaNet(),
             head=SiamFC(self.cfg.out_scale))
         ops.init_weights(self.net)
         
