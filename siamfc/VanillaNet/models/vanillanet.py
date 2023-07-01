@@ -7,8 +7,10 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from timm.models.layers import weight_init, DropPath
-from timm.models.registry import register_model
+# from timm.models.layers import weight_init, DropPath
+# from timm.models.registry import register_model
+from timm.layers import weight_init, DropPath
+from timm.registry import register_model
 
 # Series informed activation function. Implemented by conv.
 class activation(nn.ReLU):
