@@ -20,7 +20,7 @@ from .heads import SiamFC
 from .losses import BalancedLoss
 from .datasets import Pair
 from .transforms import SiamFCTransforms
-from backboneVanillaNet import VanillaNet
+from .backboneVanillaNet import VanillaNet
 
 __all__ = ['TrackerSiamFC']
 
