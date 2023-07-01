@@ -49,8 +49,10 @@ class TrackerSiamFC(Tracker):
         self.cuda = torch.cuda.is_available()
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
         
-        #修改vanillanet_5网络最后一层的输出通道数，使得输出通道数为256，与SiamFC网络的特征通道数一致，方便后续的特征提取，同时保证网络的输出尺寸不变
-        vanillanet_5.conv5 = nn.Conv2d(128, 256, 3, 1, groups=2)
+        # 修改vanillanet_5网络结构，使得输出为4维，和AlexNetV1网络的输出一致
+        vanillanet_5 = vanillanet_5()
+        vanillanet_5.conv5 = nn.Conv2d(256, 256, 3, 1, groups=2)
+
         
         # setup model
         # self.net = Net(
@@ -58,7 +60,7 @@ class TrackerSiamFC(Tracker):
         #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
             backbone=vanillanet_5(),
-            # 修改网络最后一层的输出通道数，使得输出通道数为256，与SiamFC网络的特征通道数一致，方便后续的特征提取，同时保证网络的输出尺寸不变
+            # 修改网络结构，使得输出为4维，和AlexNetV1网络的输出一致
             head=SiamFC(self.cfg.out_scale))
         # ops.init_weights(self.net)
         
