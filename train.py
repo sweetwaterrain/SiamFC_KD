@@ -13,5 +13,8 @@ if __name__ == '__main__':
     seqs = OTB(root_dir, version=2015)
 
     tracker = TrackerSiamFC()
-    tracker.train_over(seqs)
+    # 定义教师模型，加载预训练模型,并且训练,siamRPN
+    teacher_model =siamRPN
+    tracker.KD_train()
+    # tracker.train_over(seqs)
     
