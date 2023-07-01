@@ -59,7 +59,7 @@ class TrackerSiamFC(Tracker):
         #     backbone=AlexNetV1(),
         #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
-            backbone=vanillanet_5(),
+            backbone=vanillanet_5,
             # 修改网络结构，使得输出为4维，和AlexNetV1网络的输出一致
             head=SiamFC(self.cfg.out_scale))
         # ops.init_weights(self.net)
