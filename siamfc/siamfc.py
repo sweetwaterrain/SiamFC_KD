@@ -20,9 +20,10 @@ from .heads import SiamFC
 from .losses import BalancedLoss
 from .datasets import Pair
 from .transforms import SiamFCTransforms
-from .backboneVanillaNet import VanillaNet
+from .VanillaNet.models.vanillanet import vanillanet_5
 
 __all__ = ['TrackerSiamFC']
+
 
 
 class Net(nn.Module):
@@ -47,15 +48,19 @@ class TrackerSiamFC(Tracker):
         # setup GPU device if available
         self.cuda = torch.cuda.is_available()
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
-
+        
+        #修改vanillanet_5网络最后一层的输出通道数，使得输出通道数为256，与SiamFC网络的特征通道数一致，方便后续的特征提取，同时保证网络的输出尺寸不变
+        vanillanet_5.conv5 = nn.Conv2d(128, 256, 3, 1, groups=2)
+        
         # setup model
         # self.net = Net(
         #     backbone=AlexNetV1(),
         #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
-            backbone=VanillaNet(),
+            backbone=vanillanet_5(),
+            # 修改网络最后一层的输出通道数，使得输出通道数为256，与SiamFC网络的特征通道数一致，方便后续的特征提取，同时保证网络的输出尺寸不变
             head=SiamFC(self.cfg.out_scale))
-        ops.init_weights(self.net)
+        # ops.init_weights(self.net)
         
         # load checkpoint if provided
         if net_path is not None:
