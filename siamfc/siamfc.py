@@ -48,18 +48,13 @@ class TrackerSiamFC(Tracker):
         # setup GPU device if available
         self.cuda = torch.cuda.is_available()
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
-        
-        # 修改vanillanet_5网络结构，使得输出为4维，和AlexNetV1网络的输出一致
-        vanillanet_5 = vanillanet_5()
-        vanillanet_5.conv5 = nn.Conv2d(256, 256, 3, 1, groups=2)
 
-        
         # setup model
         # self.net = Net(
         #     backbone=AlexNetV1(),
         #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
-            backbone=vanillanet_5,
+            backbone=vanillanet_5(),
             # 修改网络结构，使得输出为4维，和AlexNetV1网络的输出一致
             head=SiamFC(self.cfg.out_scale))
         # ops.init_weights(self.net)
