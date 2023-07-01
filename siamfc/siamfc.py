@@ -94,7 +94,7 @@ class TrackerSiamFC(Tracker):
             'response_up': 16,
             'total_stride': 8,
             # train parameters
-            'epoch_num': 50,
+            'epoch_num': 10,
             'batch_size': 8,
             'num_workers': 32,
             'initial_lr': 1e-2,
