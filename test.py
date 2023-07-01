@@ -7,7 +7,7 @@ from siamfc import TrackerSiamFC
 
 
 if __name__ == '__main__':
-    net_path = '/kaggle/input/otb2015/OTB100/siamfc_alexnet_e10.pth'
+    net_path = '/kaggle/working/SiamFC_VanillaNet/pretrained/siamfc_alexnet_e10.pth'
     tracker = TrackerSiamFC(net_path=net_path)
 
     root_dir = os.path.expanduser('/kaggle/input/otb2015/OTB100')
