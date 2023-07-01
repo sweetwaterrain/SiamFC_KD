@@ -20,7 +20,8 @@ from .heads import SiamFC
 from .losses import BalancedLoss
 from .datasets import Pair
 from .transforms import SiamFCTransforms
-
+# 导入VanillaNet，使用VanillaNet替换AlexNetV1
+from .VanillaNet.models.vanillanet import vanillanet_5
 
 __all__ = ['TrackerSiamFC']
 
@@ -49,8 +50,11 @@ class TrackerSiamFC(Tracker):
         self.device = torch.device('cuda:0' if self.cuda else 'cpu')
 
         # setup model
+        # self.net = Net(
+        #     backbone=AlexNetV1(),
+        #     head=SiamFC(self.cfg.out_scale))
         self.net = Net(
-            backbone=AlexNetV1(),
+            backbone=vanillanet_5(),
             head=SiamFC(self.cfg.out_scale))
         ops.init_weights(self.net)
         
