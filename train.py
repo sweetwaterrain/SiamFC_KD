@@ -4,7 +4,7 @@ import os
 from got10k.datasets import *
 
 from siamfc import TrackerSiamFC
-from siamrpn.siamrpn import TrackerSiamRPN
+from rpn.siamrpn import TrackerSiamRPN
 
 if __name__ == '__main__':
     # root_dir = os.path.expanduser('~/data/GOT-10k')
