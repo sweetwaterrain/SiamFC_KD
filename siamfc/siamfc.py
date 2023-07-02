@@ -336,6 +336,7 @@ class TrackerSiamFC(Tracker):
         self.labels = torch.from_numpy(labels).to(self.device).float()
         
         return self.labels
+    
     # 添加知识蒸馏的通用训练代码，教师模型可以是任意模型，学生模型是SiamFC
     def KD_train(self, teacher_model, seqs, val_seqs=None,):
         # set to train mode

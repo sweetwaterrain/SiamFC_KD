@@ -4,6 +4,7 @@ import os
 from got10k.datasets import *
 
 from siamfc import TrackerSiamFC
+from siamrpn.siamrpn import TrackerSiamRPN
 
 if __name__ == '__main__':
     # root_dir = os.path.expanduser('~/data/GOT-10k')
@@ -12,9 +13,12 @@ if __name__ == '__main__':
     root_dir = os.path.expanduser('/kaggle/input/otb2015/OTB100')
     seqs = OTB(root_dir, version=2015)
 
-    tracker = TrackerSiamFC()
-    # 定义教师模型，加载预训练模型,并且训练,siamRPN
-    teacher_model =siamRPN
-    tracker.KD_train()
-    # tracker.train_over(seqs)
+    # 定义学生模型SiamFC
+    student_tracker = TrackerSiamFC()
+    # 定义教师模型SiamRPN，加载预训练模型
+    teacher_tracker = TrackerSiamRPN(net_path='/home/UserDirectory/gly/code/SiamFC_KD/pretrained/SiamRPN.pth')
+
+    # 训练学生模型,使用teacher_tracker进行蒸馏
+    student_tracker.KD_train(seqs, teacher_tracker, save_path='./home/UserDirectory/gly/code/SiamFC_KD/pretrained/student.pth')
+    
     
