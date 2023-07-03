@@ -19,6 +19,11 @@ if __name__ == '__main__':
     teacher_tracker = TrackerSiamRPN(net_path='/kaggle/working/siamrpn/SiamRPN.pth')
 
     # 训练学生模型,使用teacher_tracker进行蒸馏
-    student_tracker.KD_train(seqs, teacher_tracker, save_path='/kaggle/working/siamrpn/student.pth')
+    student_tracker.KD_train( teacher_tracker,seqs)
+    # 训练学生模型,不使用teacher_tracker进行蒸馏
+    # student_tracker.train(seqs)
+
+    # 保存学生模型
+    student_tracker.save('/kaggle/working/siamrpn/student.pth')
     
     
