@@ -17,9 +17,9 @@ if __name__ == '__main__':
     student_tracker = TrackerSiamFC()
     # 定义教师模型SiamRPN，加载预训练模型
     teacher_tracker = TrackerSiamRPN(net_path='/kaggle/working/siamrpn/SiamRPN.pth')
-
+    
     # 训练学生模型,使用teacher_tracker进行蒸馏
-    student_tracker.KD_train( teacher_tracker,seqs)
+    student_tracker.KD_train(teacher_tracker,seqs)
     # 训练学生模型,不使用teacher_tracker进行蒸馏
     # student_tracker.train(seqs)
 

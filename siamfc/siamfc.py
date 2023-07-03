@@ -341,7 +341,7 @@ class TrackerSiamFC(Tracker):
     def KD_train(self, teacher_model, seqs, val_seqs=None,):
         # set to train mode
         self.net.train()
-        teacher_model.eval()
+        # teacher_model.eval()
         # setup dataset
         transforms = SiamFCTransforms(
             exemplar_sz=self.cfg.exemplar_sz,
